@@ -1,0 +1,44 @@
+.dashboard-container {
+  max-width: 800px; /* Limitar el ancho para una mejor legibilidad */
+  margin: 20px auto; /* Centrar el contenedor */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: #ffffff; /* Fondo blanco */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+h2 {
+  font-family: 'Arial', sans-serif; /* Fuente moderna */
+  font-size: 24px; /* Tamaño de fuente */
+  margin-bottom: 20px; /* Espaciado inferior */
+  color: #333; /* Color del texto */
+}
+
+.guests-table {
+  width: 100%; /* Ancho completo */
+  border-collapse: collapse; /* Colapsar bordes */
+}
+
+.guests-table th, .guests-table td {
+  padding: 12px 15px; /* Espaciado en celdas */
+  text-align: left; /* Alinear texto a la izquierda */
+}
+
+.guests-table th {
+  background-color: #007BFF; /* Color de fondo del encabezado */
+  color: white; /* Color del texto del encabezado */
+  font-size: 16px; /* Tamaño de fuente del encabezado */
+}
+
+.guests-table tr {
+  border-bottom: 1px solid #ddd; /* Línea divisoria entre filas */
+}
+
+.guests-table tr:hover {
+  background-color: #f1f1f1; /* Color al pasar el mouse */
+}
+
+.guests-table td {
+  color: #555; /* Color del texto de las celdas */
+  font-size: 14px; /* Tamaño de fuente de las celdas */
+}
