@@ -1,6 +1,10 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #000000;
+    background-image: url('./assets/escudo.png');
+        background-repeat: no-repeat; /* Evita que la imagen se repita */
+        background-size: auto 100%; /* Ajusta el fondo al alto de la pantalla */
+        background-position: right center; /* El fondo empieza en el centro y se desplaza hacia la derecha */
     margin: 0;
     padding: 20px;
 }
@@ -30,6 +34,7 @@ body {
 .title h2{
     margin-top: 10px;
     font-size: 2rem;
+    color: white;
 }
 
 .description{
@@ -51,6 +56,10 @@ body {
     align-items: center;
     justify-content: center;
     gap: 25px;
+}
+
+.guestlist img{
+    color: white;
 }
 
 .date{
@@ -125,11 +134,12 @@ body {
 /* Estilos responsivos para pantallas pequeñas */
 @media screen and (max-width: 480px) {
     body {
-        background-image: url('../fondo-escudo.png');
+        background-image: url('./assets/escudo.png');
         font-family: Arial, sans-serif;
-        background-color: #000000;
-        background-repeat: no-repeat;
-        background-size: cover;
+        background-color: #000000; /* Fondo negro */
+        background-repeat: no-repeat; /* Evita que la imagen se repita */
+        background-size: auto 100%; /* Ajusta el fondo al alto de la pantalla */
+        background-position: right center; /* El fondo empieza en el centro y se desplaza hacia la derecha */
         margin: 0;
         padding: 20px;
         display: flex;
@@ -153,12 +163,14 @@ body {
     
     .title h1{
         margin: 0;
+        color: white;
         font-size: 2.5rem;
     }
     
     .title h2{
         margin-top: 10px;
         font-size: 2rem;
+        color: white;
     }
     
     .description{

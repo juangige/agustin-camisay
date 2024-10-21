@@ -1,45 +1,55 @@
-import React, { useState } from 'react';
-import { collection, getDocs, query, where, doc, updateDoc } from "firebase/firestore";
-import { db } from './db/firebase.js'; // Asegúrate de importar Firebase Firestore
-import './App.css';
+import React, { useState } from "react";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
+import { db } from "./db/firebase.js"; // Asegúrate de importar Firebase Firestore
+import "./App.css";
+import buscadorImg from './assets/buscador.png'
 
 function indexApp() {
-    const [searchInput, setSearchInput] = useState("");
-    const [guest, setGuest] = useState(null);
-    const [guestId, setGuestId] = useState(""); // Guardar el ID del invitado
-    const [error, setError] = useState("");
-    const [showModal, setShowModal] = useState(false);
-    
-    const handleSearch = async () => {
-      try {
-        const q = query(collection(db, "guests"), where("name", "==", searchInput));
-        const querySnapshot = await getDocs(q);
-        if (!querySnapshot.empty) {
-          const guestDoc = querySnapshot.docs[0];
-          setGuest(guestDoc.data());
-          setGuestId(guestDoc.id); // Guardar el ID del documento
-          setShowModal(true);
-        } else {
-          setError("Invitado no encontrado.");
-        }
-      } catch (err) {
-        setError("Error buscando invitado: " + err.message);
+  const [searchInput, setSearchInput] = useState("");
+  const [guest, setGuest] = useState(null);
+  const [guestId, setGuestId] = useState(""); // Guardar el ID del invitado
+  const [error, setError] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
+  const handleSearch = async () => {
+    try {
+      const q = query(
+        collection(db, "guests"),
+        where("name", "==", searchInput)
+      );
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const guestDoc = querySnapshot.docs[0];
+        setGuest(guestDoc.data());
+        setGuestId(guestDoc.id); // Guardar el ID del documento
+        setShowModal(true);
+      } else {
+        setError("Invitado no encontrado.");
       }
-    };
-  
-    const handleResponse = async (status) => {
-      try {
-        // Actualizar el campo `status` en el documento de Firestore
-        const guestRef = doc(db, "guests", guestId);
-        await updateDoc(guestRef, { status });
-        console.log(`Estado actualizado: ${status}`);
-        setShowModal(false);
-      } catch (err) {
-        console.error("Error al actualizar el estado: ", err);
-        setError("Error al actualizar el estado.");
-      }
-    };
-  
+    } catch (err) {
+      setError("Error buscando invitado: " + err.message);
+    }
+  };
+
+  const handleResponse = async (status) => {
+    try {
+      // Actualizar el campo `status` en el documento de Firestore
+      const guestRef = doc(db, "guests", guestId);
+      await updateDoc(guestRef, { status });
+      console.log(`Estado actualizado: ${status}`);
+      setShowModal(false);
+    } catch (err) {
+      console.error("Error al actualizar el estado: ", err);
+      setError("Error al actualizar el estado.");
+    }
+  };
 
   return (
     <div>
@@ -68,7 +78,14 @@ function indexApp() {
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Ingresa tu nombre"
             />
-            <button onClick={handleSearch}>Buscar</button>
+              <img
+                onClick={handleSearch}
+                src={buscadorImg}
+                alt="Buscar"
+                style={{ width: "20px", height: "20px" }}
+              />
+              
+           
           </div>
           {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
@@ -78,9 +95,15 @@ function indexApp() {
         {showModal && (
           <div className="modal">
             <h3>{guest.name}, ¿Asistirás al evento?</h3>
-            <button onClick={() => handleResponse('aceptado')}>Aceptar invitación</button>
-            <button onClick={() => handleResponse('rechazado')}>Rechazar invitación</button>
-            <button onClick={() => handleResponse('pendiente')}>Pendiente</button>
+            <button onClick={() => handleResponse("aceptado")}>
+              Aceptar invitación
+            </button>
+            <button onClick={() => handleResponse("rechazado")}>
+              Rechazar invitación
+            </button>
+            <button onClick={() => handleResponse("pendiente")}>
+              Pendiente
+            </button>
           </div>
         )}
       </div>
